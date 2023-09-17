@@ -1,0 +1,43 @@
+void publick() {
+  int opcion;
+  Serial.println("MENU");
+  Serial.println("Ingrese un numero para las opciones indicadas:");
+  Serial.println("1. Verificar funcionamiento de los leds");
+  Serial.println("2. Crear imagen");
+  Serial.println("3. Visualizar patrones ya establecidos");
+  
+  while (!Serial.available()) {
+    // Espera a que se ingrese un número por el puerto serial
+  }
+  
+  opcion = Serial.parseInt();
+
+  // Realizar acciones en función de la opción seleccionada
+  switch (opcion) {
+    case 1:
+
+    break;
+    case 2:
+      // Coloca aquí el código para crear una imagen
+      break;
+    case 3:
+      // Coloca aquí el código para visualizar patrones establecidos
+      break;
+    default:
+      Serial.println("Opción no válida");
+  }
+  
+  // Limpia el buffer del puerto serial
+  while (Serial.available()) {
+    Serial.read();
+  }
+}
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+void loop() {
+  publick();
+}
