@@ -1,0 +1,47 @@
+#include <Arduino.h>
+#include <SPI.h> // Necesario para la comunicación SPI
+
+// Definición de pines para los pines del registro de desplazamiento 74HC595
+const int latchPin = 8;   // Pin ST_CP (almacenamiento de registro)
+const int clockPin = 12;  // Pin SH_CP (pulso de reloj)
+const int dataPin = 11;   // Pin DS (entrada de datos)
+
+void setup() {
+  // Configura los pines del registro de desplazamiento como salidas
+  pinMode(latchPin, OUTPUT);
+  pinMode(clockPin, OUTPUT);
+  pinMode(dataPin, OUTPUT);
+
+  // Configura la comunicación SPI (configuración específica de Arduino)
+  SPI.begin();
+}
+
+void loop() {
+  // Enciende todos los LEDs
+  shiftOutAllHigh();
+
+  // Espera un tiempo
+  delay(1000); // Espera 1 segundo
+
+  // Apaga todos los LEDs
+  shiftOutAllLow();
+
+  // Espera un tiempo
+  delay(1000); // Espera 1 segundo
+}
+
+void shiftOutAllHigh() {
+  digitalWrite(latchPin, LOW); // Inicia la transmisión de datos
+  for (int i = 0; i < 8; i++) {
+    shiftOut(dataPin, clockPin, MSBFIRST, B11111111); // Envía un byte con todos los bits en HIGH
+  }
+  digitalWrite(latchPin, HIGH); // Finaliza la transmisión de datos
+}
+
+void shiftOutAllLow() {
+  digitalWrite(latchPin, LOW); // Inicia la transmisión de datos
+  for (int i = 0; i < 8; i++) {
+    shiftOut(dataPin, clockPin, MSBFIRST, B00000000); // Envía un byte con todos los bits en LOW
+  }
+  digitalWrite(latchPin, HIGH); // Finaliza la transmisión de datos
+}
