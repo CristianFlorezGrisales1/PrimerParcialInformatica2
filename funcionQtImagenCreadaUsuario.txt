@@ -1,0 +1,27 @@
+#include <iostream>
+
+using namespace std;
+
+int main  (){
+    int columnas=8,filas=8;
+    int matriz[8][8];
+
+    for(int i=0;i<filas;i++){
+        for(int j=0;j<columnas;j++){
+
+            cout<<"posisicion ["<<i<<"]["<<j<<"] ingrese valor (apagado o prendido) :";
+            cin>>matriz[i][j];
+        }
+    }
+
+
+    for(int i=0;i<filas;i++){
+        for(int j=0;j<columnas;j++){
+
+            cout<<matriz[i][j];
+        }
+        cout<<"\n";
+
+    }
+    return 0;
+}
